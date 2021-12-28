@@ -1,13 +1,18 @@
 class User < ApplicationRecord
-    before_validation  :ensue_login_has_a_value
+    
     validates :email, :confirmemail, presence: true
 
-    private def ensue_login_has_a_value
-
-        if login.nil?
-            self.login = email unless email.blank? 
-        end
+    after_initialize do |user|
+        puts "you have initialize an object"
     end
 
+    after_find do |user|
+        puts "you have found an object"
+    end
+
+
+    after_touch do |user|
+        puts "You have touched an object"
+    end
 
 end
